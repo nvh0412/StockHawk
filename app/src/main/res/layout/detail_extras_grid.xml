@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:background="@color/detail_accent_pane_background"
+  android:paddingBottom="@dimen/abc_list_item_padding_horizontal_material"
+  android:paddingEnd="@dimen/stock_detail_horizontal_padding"
+  android:paddingLeft="@dimen/stock_detail_horizontal_padding"
+  android:paddingRight="@dimen/stock_detail_horizontal_padding"
+  android:paddingStart="@dimen/stock_detail_horizontal_padding"
+  android:paddingTop="@dimen/abc_list_item_padding_horizontal_material"
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  android:layout_weight="2"
+  app:columnCount="2">
+
+  <TextView
+    android:id="@+id/detail_stock_symbol_label"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:fontFamily="sans-serif"
+    android:textColor="@color/detail_accent_label"
+    android:text="@string/stock_symbol"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    app:layout_columnWeight="1"
+    app:layout_gravity="fill"
+    app:layout_rowWeight="1"/>
+
+  <TextView
+    android:id="@+id/detail_stock_symbol_textview"
+    android:gravity="center_vertical"
+    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+    android:textColor="@android:color/white"
+    style="@style/StockSymbolTextStyle"
+    app:layout_gravity="fill"
+    tools:text="38%"/>
+
+  <TextView
+    android:id="@+id/detail_stock_bid_price_label"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:text="@string/bid_price"
+    android:fontFamily="sans-serif"
+    android:textColor="@color/detail_accent_label"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    app:layout_columnWeight="1"
+    app:layout_gravity="fill"
+    app:layout_rowWeight="1"/>
+
+  <TextView
+    android:id="@+id/detail_stock_bid_price_textview"
+    android:gravity="center_vertical"
+    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+    android:textColor="@android:color/white"
+    app:layout_gravity="fill"
+    app:layout_rowWeight="1"/>
+
+  <TextView
+    android:id="@+id/detail_stock_percent_change_label"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:text="@string/percent_change"
+    android:fontFamily="sans-serif"
+    android:textColor="@color/detail_accent_label"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    app:layout_columnWeight="1"
+    app:layout_gravity="fill"
+    app:layout_rowWeight="1"/>
+
+  <TextView
+    android:id="@+id/detail_stock_percent_change_textview"
+    android:gravity="center_vertical"
+    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+    android:textColor="@android:color/white"
+    app:layout_gravity="fill"
+    app:layout_rowWeight="1"/>
+
+</android.support.v7.widget.GridLayout>

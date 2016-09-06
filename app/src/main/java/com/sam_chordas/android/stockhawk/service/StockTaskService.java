@@ -38,7 +38,9 @@ public class StockTaskService extends GcmTaskService{
   public StockTaskService(Context context){
     mContext = context;
   }
-  String fetchData(String url) throws IOException{
+
+  private String fetchData(String url) throws IOException{
+    Log.d(LOG_TAG, "URL: " + url);
     Request request = new Request.Builder()
         .url(url)
         .build();
@@ -57,8 +59,9 @@ public class StockTaskService extends GcmTaskService{
     try{
       // Base URL for the Yahoo query
       urlStringBuilder.append("https://query.yahooapis.com/v1/public/yql?q=");
-      urlStringBuilder.append(URLEncoder.encode("select * from yahoo.finance.quotes where symbol "
-        + "in (", "UTF-8"));
+      urlStringBuilder.append(
+        URLEncoder.encode("select * from yahoo.finance.quotes where symbol in (", "UTF-8")
+      );
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
     }

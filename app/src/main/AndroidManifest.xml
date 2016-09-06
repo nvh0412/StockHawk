@@ -35,11 +35,30 @@
                 <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
             </intent-filter>
         </service>
+
+        <service android:name="com.sam_chordas.android.stockhawk.service.DetailStockTaskService"
+                 android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"
+                 android:exported="true">
+          <intent-filter>
+            <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
+          </intent-filter>
+        </service>
+
         <service android:name="com.sam_chordas.android.stockhawk.service.StockIntentService" />
         <provider
             android:authorities="com.sam_chordas.android.stockhawk.data.QuoteProvider"
             android:name="com.sam_chordas.android.stockhawk.data.generated.QuoteProvider"
             android:exported="false"/>
+
+        <activity
+            android:name=".ui.DetailActivity"
+            android:theme="@style/AppTheme.Details"
+            android:parentActivityName=".ui.MyStocksActivity"
+            android:label="@string/title_activity_detail">
+            <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="com.sam_chordas.android.stockhawk.ui.MyStocksActivity" />
+        </activity>
     </application>
 
 </manifest>

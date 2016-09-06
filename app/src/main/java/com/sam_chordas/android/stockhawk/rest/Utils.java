@@ -2,12 +2,17 @@ package com.sam_chordas.android.stockhawk.rest;
 
 import android.content.ContentProviderOperation;
 import android.util.Log;
+
+import com.sam_chordas.android.stockhawk.data.DetailQuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
-import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by sam_chordas on 10/8/15.
@@ -48,6 +53,30 @@ public class Utils {
     return batchOperations;
   }
 
+  public static ArrayList detailQuoteJsonToContentVals(String JSON){
+    ArrayList<ContentProviderOperation> batchOperations = new ArrayList<>();
+    JSONObject jsonObject;
+    JSONArray resultsArray;
+    try{
+      jsonObject = new JSONObject(JSON);
+      if (jsonObject.length() != 0){
+        jsonObject = jsonObject.getJSONObject("query");
+        resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
+        if (resultsArray != null && resultsArray.length() != 0){
+          for (int i = 0; i < resultsArray.length(); i++){
+            jsonObject = resultsArray.getJSONObject(i);
+            batchOperations.add(buildDetailBatchOperation(jsonObject));
+          }
+        }
+      }
+    } catch (JSONException e){
+      Log.e(LOG_TAG, "String to JSON failed: " + e);
+    }
+    return batchOperations;
+  }
+
+
+
   public static String truncateBidPrice(String bidPrice){
     bidPrice = String.format("%.2f", Float.parseFloat(bidPrice));
     return bidPrice;
@@ -70,7 +99,7 @@ public class Utils {
     return change;
   }
 
-  public static ContentProviderOperation buildBatchOperation(JSONObject jsonObject){
+  private static ContentProviderOperation buildBatchOperation(JSONObject jsonObject){
     ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
         QuoteProvider.Quotes.CONTENT_URI);
     try {
@@ -80,6 +109,7 @@ public class Utils {
       builder.withValue(QuoteColumns.PERCENT_CHANGE, truncateChange(
           jsonObject.getString("ChangeinPercent"), true));
       builder.withValue(QuoteColumns.CHANGE, truncateChange(change, false));
+      builder.withValue(QuoteColumns.CREATED, new Date().getTime());
       builder.withValue(QuoteColumns.ISCURRENT, 1);
       if (change.charAt(0) == '-'){
         builder.withValue(QuoteColumns.ISUP, 0);
@@ -87,6 +117,22 @@ public class Utils {
         builder.withValue(QuoteColumns.ISUP, 1);
       }
 
+    } catch (JSONException e){
+      e.printStackTrace();
+    }
+    return builder.build();
+  }
+
+  private static ContentProviderOperation buildDetailBatchOperation(JSONObject jsonObject) {
+    ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
+      QuoteProvider.DetailQuotes.CONTENT_URI);
+    try {
+      builder.withValue(DetailQuoteColumns.SYMBOL, jsonObject.getString("Symbol"));
+      builder.withValue(DetailQuoteColumns.DATE, jsonObject.getString("Date"));
+      builder.withValue(DetailQuoteColumns.OPEN, jsonObject.getString("Open"));
+      builder.withValue(DetailQuoteColumns.HIGH, jsonObject.getString("High"));
+      builder.withValue(DetailQuoteColumns.LOW, jsonObject.getString("Low"));
+      builder.withValue(DetailQuoteColumns.CLOSE, jsonObject.getString("Close"));
     } catch (JSONException e){
       e.printStackTrace();
     }

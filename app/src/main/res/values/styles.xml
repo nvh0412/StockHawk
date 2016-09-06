@@ -1,8 +1,7 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme"
-      parent="Theme.AppCompat">
+  <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
       <item name="colorPrimary">@color/material_blue_500</item>
       <item name="colorPrimaryDark">@color/material_blue_700</item>
     <!-- Customize your theme here. -->
@@ -20,5 +19,7 @@
     <item name="android:textSize">25sp</item>
     <item name="android:textAllCaps">true</item>
   </style>
+
+  <style name="AppTheme.Details" parent="AppTheme" />
 
 </resources>
