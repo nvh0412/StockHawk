@@ -1,6 +1,7 @@
 package com.sam_chordas.android.stockhawk.service;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.os.RemoteException;
 import android.util.Log;
