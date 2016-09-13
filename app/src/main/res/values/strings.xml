@@ -15,4 +15,6 @@
   <string name="bid_price">Bid Price</string>
   <string name="percent_change">Percent Change</string>
   <string name="title_widget_today">StockToday</string>
+  <string name="empty_stock_list">No Stock Information Available</string>
+  <string name="title_widget_detail">Stock Details</string>
 </resources>

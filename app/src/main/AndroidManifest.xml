@@ -60,7 +60,8 @@
               android:value="com.sam_chordas.android.stockhawk.ui.MyStocksActivity" />
         </activity>
 
-        <receiver android:name=".widget.TodayStockWidgetProvider"
+        <receiver
+          android:name=".widget.TodayStockWidgetProvider"
           android:label="@string/title_widget_today" >
           <intent-filter>
             <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
@@ -70,6 +71,19 @@
         </receiver>
 
         <service android:name=".widget.TodayWidgetIntentService" />
+
+        <receiver
+          android:name=".widget.DetailWidgetProvider"
+          android:label="@string/title_widget_detail" >
+          <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            <action android:name="com.sam_chordas.android.stockhawk.app.ACTION_DATA_UPDATED" />
+          </intent-filter>
+          <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info_detail" />
+        </receiver>
+        <service
+          android:name=".widget.DetailWidgetRemoteViewsService"
+          android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>
