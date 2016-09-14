@@ -22,4 +22,6 @@
   <dimen name="stock_widget_text_size">24dp</dimen>
   <dimen name="stock_price_space">8dp</dimen>
   <dimen name="list_icon">40dp</dimen>
+
+  <dimen name="stock_detail_padding">30dp</dimen>
 </resources>

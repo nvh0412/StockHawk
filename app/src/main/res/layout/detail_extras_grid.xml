@@ -23,6 +23,7 @@
     android:textColor="@color/detail_accent_label"
     android:text="@string/stock_symbol"
     android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    android:contentDescription="@string/stock_symbol"
     app:layout_columnWeight="1"
     app:layout_gravity="fill"
     app:layout_rowWeight="1"/>
@@ -32,6 +33,8 @@
     android:gravity="center_vertical"
     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
     android:textColor="@android:color/white"
+    android:paddingRight="@dimen/stock_detail_padding"
+    android:paddingEnd="@dimen/stock_detail_padding"
     style="@style/StockSymbolTextStyle"
     app:layout_gravity="fill"
     tools:text="38%"/>
@@ -44,7 +47,7 @@
     android:fontFamily="sans-serif"
     android:textColor="@color/detail_accent_label"
     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-    app:layout_columnWeight="1"
+    android:contentDescription="@string/bid_price"
     app:layout_gravity="fill"
     app:layout_rowWeight="1"/>
 
@@ -54,7 +57,9 @@
     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
     android:textColor="@android:color/white"
     app:layout_gravity="fill"
-    app:layout_rowWeight="1"/>
+    android:paddingRight="@dimen/stock_detail_padding"
+    android:paddingEnd="@dimen/stock_detail_padding"
+    tools:text="38%"/>
 
   <TextView
     android:id="@+id/detail_stock_percent_change_label"
@@ -64,7 +69,7 @@
     android:fontFamily="sans-serif"
     android:textColor="@color/detail_accent_label"
     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-    app:layout_columnWeight="1"
+    android:contentDescription="@string/percent_change"
     app:layout_gravity="fill"
     app:layout_rowWeight="1"/>
 
@@ -74,6 +79,8 @@
     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
     android:textColor="@android:color/white"
     app:layout_gravity="fill"
-    app:layout_rowWeight="1"/>
+    android:paddingRight="@dimen/stock_detail_padding"
+    android:paddingEnd="@dimen/stock_detail_padding"
+    tools:text="38%"/>
 
 </android.support.v7.widget.GridLayout>
