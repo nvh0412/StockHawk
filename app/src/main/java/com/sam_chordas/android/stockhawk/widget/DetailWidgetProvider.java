@@ -31,8 +31,6 @@ public class DetailWidgetProvider extends AppWidgetProvider {
       // Set up the collection
       setRemoteAdapter(context, views);
 
-      boolean useDetailActivity = context.getResources().getBoolean(R.bool.use_detail_activity);
-
       Intent clickIntentTemplate = new Intent(context, MyStocksActivity.class);
 
       PendingIntent clickPendingIntent = TaskStackBuilder.create(context)

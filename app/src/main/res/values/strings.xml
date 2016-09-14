@@ -8,7 +8,7 @@
   <string name="symbol_search">Symbol Search</string>
   <string name="content_test">Search for a Stock Symbol</string>
   <string name="input_hint">FB</string>
-  <string name="input_prefill"></string>
+  <string name="input_prefill" translatable="false"></string>
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
   <string name="title_activity_detail">Stock Detail</string>
   <string name="stock_symbol">Symbol</string>
@@ -18,4 +18,6 @@
   <string name="empty_stock_list">No Stock Information Available</string>
   <string name="title_widget_detail">Stock Details</string>
   <string name="non_existent_stock">Your stock is a non-existent stock.</string>
+  <string name="fab_button">Add Stock</string>
+  <string name="stock_already_save">\"This stock is already saved!\"</string>
 </resources>
