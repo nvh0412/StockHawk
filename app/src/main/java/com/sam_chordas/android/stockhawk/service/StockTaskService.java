@@ -1,25 +1,33 @@
 package com.sam_chordas.android.stockhawk.service;
 
+import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
+import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.rest.Utils;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by sam_chordas on 9/30/15.
@@ -127,9 +135,19 @@ public class StockTaskService extends GcmTaskService{
             mContext.getContentResolver().update(QuoteProvider.Quotes.CONTENT_URI, contentValues,
                 null, null);
           }
-          mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY,
-              Utils.quoteJsonToContentVals(getResponse));
 
+          ArrayList<ContentProviderOperation> batchOperations = Utils.quoteJsonToContentVals(getResponse);
+          if (!batchOperations.isEmpty()) {
+            mContext.getContentResolver().applyBatch(QuoteProvider.AUTHORITY, batchOperations);
+          } else {
+            Handler h = new Handler(Looper.getMainLooper());
+            h.post(new Runnable() {
+              @Override
+              public void run() {
+                Toast.makeText(mContext, mContext.getResources().getString(R.string.non_existent_stock), Toast.LENGTH_SHORT).show();
+              }
+            });
+          }
           Intent dataUpdatedIntent = new Intent(ACTION_DATE_UPDATED);
           mContext.sendBroadcast(dataUpdatedIntent);
         }catch (RemoteException | OperationApplicationException e){

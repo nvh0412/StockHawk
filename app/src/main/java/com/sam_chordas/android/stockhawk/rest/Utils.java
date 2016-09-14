@@ -32,11 +32,13 @@ public class Utils {
       if (jsonObject != null && jsonObject.length() != 0){
         jsonObject = jsonObject.getJSONObject("query");
         int count = Integer.parseInt(jsonObject.getString("count"));
-        if (count == 1){
+        if (count == 1) {
           jsonObject = jsonObject.getJSONObject("results")
               .getJSONObject("quote");
-          batchOperations.add(buildBatchOperation(jsonObject));
-        } else{
+          if (isValidStock(jsonObject)) {
+            batchOperations.add(buildBatchOperation(jsonObject));
+          }
+        } else {
           resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
           if (resultsArray != null && resultsArray.length() != 0){
@@ -83,6 +85,9 @@ public class Utils {
   }
 
   public static String truncateChange(String change, boolean isPercentChange){
+    if ("null".equals(change)) {
+      return null;
+    }
     String weight = change.substring(0,1);
     String ampersand = "";
     if (isPercentChange){
@@ -137,5 +142,17 @@ public class Utils {
       e.printStackTrace();
     }
     return builder.build();
+  }
+
+  public static boolean isValidStock(JSONObject jsonObject) {
+    try {
+      if ("null".equals(jsonObject.getString("Bid"))) {
+        return false;
+      }
+      return true;
+    } catch (JSONException e) {
+      e.printStackTrace();
+      return false;
+    }
   }
 }

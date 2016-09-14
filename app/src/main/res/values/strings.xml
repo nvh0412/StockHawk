@@ -17,4 +17,5 @@
   <string name="title_widget_today">StockToday</string>
   <string name="empty_stock_list">No Stock Information Available</string>
   <string name="title_widget_detail">Stock Details</string>
+  <string name="non_existent_stock">Your stock is a non-existent stock.</string>
 </resources>
